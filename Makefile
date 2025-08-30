@@ -31,7 +31,7 @@ deploy: check-env
 
 deploy-continuous: check-env
 	gcloud container clusters get-credentials --project ${PROJECT_ID} ${CLUSTER} --zone ${ZONE}
-	skaffold dev --default-repo=us-central1-docker.pkg.dev/${PROJECT_ID}/bank-of-anthos
+	skaffold dev --default-repo=us-central1-docker.pkg.dev/${PROJECT_ID}/bank-of-anthos 
 
 monolith-fw-rule: check-env
 	export CLUSTER_POD_CIDR="$(shell gcloud container clusters describe ${CLUSTER} --format="value(clusterIpv4Cidr)" --project ${PROJECT_ID} --zone=${ZONE})" && \

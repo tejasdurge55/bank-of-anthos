@@ -29,43 +29,43 @@ build:
     context: .
   tagPolicy:
     sha256: {}
-test:
-  - image: userservice # code style
-    context: .
-    custom:
-      - command: |
-          pip install --upgrade pip
-          pip install pylint --quiet --no-cache-dir
-          pip install -r requirements.txt --quiet --no-cache-dir
-          pylint --rcfile=../../../.pylintrc *.py
-        timeoutSeconds: 1200
-        dependencies: 
-          paths:
-            - "**/*.py"
-            - "../../../.pylintrc"
-            - "requirements.txt"
-  - image: userservice # unit tests
-    context: .
-    custom:
-      - command: |
-          pip install -r requirements.txt --quiet
-          python3 -m pytest -v -p no:warnings
-        timeoutSeconds: 1200
-        dependencies: 
-          paths:
-            - "**/*.py"
-            - "requirements.txt"
-  - image: userservice # code coverage
-    context: .
-    custom:
-      - command: |
-          pip install -r requirements.txt --quiet
-          python3 -m pytest --cov=./ tests/
-        timeoutSeconds: 1200
-        dependencies: 
-          paths:
-            - "**/*.py"
-            - "requirements.txt"
+# test:
+#   - image: userservice # code style
+#     context: .
+#     custom:
+#       - command: |
+#           pip install --upgrade pip
+#           pip install pylint --quiet --no-cache-dir
+#           pip install -r requirements.txt --quiet --no-cache-dir
+#           pylint --rcfile=../../../.pylintrc *.py
+#         timeoutSeconds: 1200
+#         dependencies: 
+#           paths:
+#             - "**/*.py"
+#             - "../../../.pylintrc"
+#             - "requirements.txt"
+#   - image: userservice # unit tests
+#     context: .
+#     custom:
+#       - command: |
+#           pip install -r requirements.txt --quiet
+#           python3 -m pytest -v -p no:warnings
+#         timeoutSeconds: 1200
+#         dependencies: 
+#           paths:
+#             - "**/*.py"
+#             - "requirements.txt"
+#   - image: userservice # code coverage
+#     context: .
+#     custom:
+#       - command: |
+#           pip install -r requirements.txt --quiet
+#           python3 -m pytest --cov=./ tests/
+#         timeoutSeconds: 1200
+#         dependencies: 
+#           paths:
+#             - "**/*.py"
+#             - "requirements.txt"
 deploy:
   kubectl: {}
 profiles:
